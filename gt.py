@@ -5,13 +5,14 @@ import random
 # starting turn and per turn cost for players
 
 turn = 0
-tax_rate = 0.3
-cost_of_living = 0.05
+tax_rate = 0.2
+cost_of_living = 0.5
 players = 2
 service_cost = 0.01
 minimum = 1
 gdp = 1
 demand = 1
+inflation = 0.01
 
 # productivity and resource settings
 
@@ -41,6 +42,7 @@ p1_lastround = 0
 p2_thisround = 0 
 p2_lastround = 0
 gdplastround = 1
+cost_of_living_temp = 0
 
 # game starts 
 
@@ -58,10 +60,10 @@ while (current_account - total_last_resources) > 0.01 or current_account > minim
 	p1_random = round(random.uniform(0.9, 1.1), 3)
 	p2_random = round(random.uniform(0.9, 1.1), 3)
 
-
 # adjusting the cost of living for the round 
 
-	cost_of_living = cost_of_living * (gdp / gdplastround)
+	cost_of_living_temp = cost_of_living * inflation
+	cost_of_living = cost_of_living + cost_of_living_temp
 
 # player 1 cost of living reduction 
 	
@@ -99,13 +101,13 @@ while (current_account - total_last_resources) > 0.01 or current_account > minim
 
 # player 1 contribution to the current_account
 
-	bank_temp1 = p1_bank * p1_give
+	bank_temp1 = productivity_temp1 * p1_give
 	p1_bank = p1_bank - bank_temp1
 	current_account = current_account + bank_temp1
 
 # player 2 contribution to the current_account
 
-	bank_temp2 = p2_bank * p2_give
+	bank_temp2 = productivity_temp2 * p2_give
 	p2_bank = p2_bank - bank_temp2
 	current_account = current_account + bank_temp2
 
