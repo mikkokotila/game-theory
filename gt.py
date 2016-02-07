@@ -7,10 +7,10 @@ import random
 
 turn = 0
 tax_rate = 0.2
-cost_of_living = 0.5
+cost_of_living = 0.3
 players = 2
 service_cost = 0.01101
-minimum = 1
+minimum = 0.1
 gdp = 1
 demand = 1
 inflation = 0.01
@@ -24,24 +24,24 @@ motivation_adjustment = 0.01
 # player one starting settings
 
 p1_productivity = 1
-p1_bank = 0
+p1_bank = 10
 p1_motivation = 1
 
 # player two starting settings
 
 p2_productivity = 1
-p2_bank = 0
+p2_bank = 10
 p2_motivation = 1
 
 # extra configuration values initialised
 
-total_last_resources = 99
 p1_thisround = 0 
 p1_lastround = 0
 p2_thisround = 0 
 p2_lastround = 0
 gdplastround = 1
 cost_of_living_temp = 0
+reason = "abc"
 
 # game starts 
 
@@ -51,7 +51,7 @@ p1_give = input("What ratio will player 1 give back at : ")
 p2_give = input("What ratio will player 2 give back at : ")
 sleeptime = input("Delay in seconds between rounds : ")
 
-while (current_account - total_last_resources) > 0.01 or current_account > minimum:
+while current_account > minimum and p1_bank > minimum and p2_bank > minimum:
 	turn = turn + 1
 
 # set randomness factor for both players
@@ -175,4 +175,11 @@ while (current_account - total_last_resources) > 0.01 or current_account > minim
 
 	time.sleep(sleeptime)	
 
-print("GAME OVER", p1_give,"vs.",p2_give)
+if current_account <= minimum:
+	reason = "CURRENT ACCOUNT ON NEGATIVE"
+elif p1_bank <= minimum:
+	reason = "PLAYER 1 BUSTED"
+elif p2_bank <= minimum:
+	reason = "PLAYER 2 BUSTED"
+
+print("GAME OVER", p1_give,"vs.",p2_give,"on",turn,"due to",reason)
