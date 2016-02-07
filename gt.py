@@ -61,7 +61,7 @@ while (current_account - total_last_resources) > 0.01 or current_account > minim
 
 # adjusting the cost of living for the round 
 
-	cost_of_living = cost_of_living * (gdp / gdplastround)
+	cost_of_living = cost_of_living * (gdp / gdplastround / 10)
 
 # player 1 cost of living reduction 
 	
