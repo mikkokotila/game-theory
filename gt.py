@@ -8,7 +8,7 @@ turn = 0
 tax_rate = 0.3
 cost_of_living = 0.05
 players = 2
-service_cost = 0.02
+service_cost = 0.01
 minimum = 1
 gdp = 1
 demand = 1
@@ -125,7 +125,7 @@ while (current_account - total_last_resources) > 0.01 or current_account > minim
 
 # admin fee is deducted from the current_account
 	
-	current_account = current_account - (productivity_temp1 + productivity_temp2) * service_cost
+	current_account = current_account - (productivity_temp1 + productivity_temp2) * service_cost * 0.1
 
 # GDP adjustment
 
