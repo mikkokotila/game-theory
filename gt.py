@@ -6,10 +6,11 @@ import random
 
 turn = 0
 tax_rate = 0.2
+cost_of_living = 0.2
 players = 2
 service_cost = 0.05
 minimum = 1
-gdp = 0
+gdp = 1
 demand = 1
 
 # productivity and resource settings
@@ -39,6 +40,7 @@ p1_thisround = 0
 p1_lastround = 0
 p2_thisround = 0 
 p2_lastround = 0
+gdplastround = 1
 
 # game starts 
 
@@ -55,6 +57,25 @@ while (current_account - total_last_resources) > 0.01 or current_account > minim
 
 	p1_random = round(random.uniform(0.9, 1.1), 3)
 	p2_random = round(random.uniform(0.9, 1.1), 3)
+
+
+# adjusting the cost of living for the round 
+
+	cost_of_living = cost_of_living * (gdp / gdplastround)
+
+# player 1 cost of living reduction 
+	
+	if p1_bank >= cost_of_living * p1_random:
+		p1_bank = p1_bank - cost_of_living * p1_random
+	else:
+		current_account = current_account - cost_of_living * p1_random
+
+# player 2 cost of living reduction 
+
+	if p2_bank >= cost_of_living * p2_random:
+		p2_bank = p2_bank - cost_of_living * p2_random
+	else:
+		current_account = current_account - cost_of_living * p2_random
 
 # player 1 production and earnings turn
 	
@@ -108,7 +129,9 @@ while (current_account - total_last_resources) > 0.01 or current_account > minim
 
 # GDP adjustment
 
+	gdplastround = gdp
 	gdp = gdp + (productivity_temp1 + productivity_temp2)
+
 
 # Demand adjustment for both players
 
@@ -143,7 +166,7 @@ while (current_account - total_last_resources) > 0.01 or current_account > minim
 
 # results for the turn are printed on the screen
 
-	print(p1,p2,b1,b2,m1,m2,de,gd,cu,ex)
+	print(turn," : ",p1,p2,b1,b2,m1,m2,de,gd,cu,ex)
 
 # the delay before next round is set
 
