@@ -1,4 +1,5 @@
 #!/usr/bin/python
+
 import time
 import random
 
@@ -8,7 +9,7 @@ turn = 0
 tax_rate = 0.2
 cost_of_living = 0.5
 players = 2
-service_cost = 0.01
+service_cost = 0.01101
 minimum = 1
 gdp = 1
 demand = 1
@@ -119,13 +120,13 @@ while (current_account - total_last_resources) > 0.01 or current_account > minim
 # player 2 motivation adjustment (neg)
 
     	if bank_temp1 <= bank_temp2:
-    		p2_motivation = p2_motivation + (p2_motivation * motivation_adjustment * p1_random)
+    		p2_motivation = p2_motivation + (p2_motivation * motivation_adjustment * p2_random)
     	else:
     		p2_motivation = p2_motivation + (p2_bank / p1_bank) * (p2_give / p1_give) * demand * p2_random
 
 # admin fee is deducted from the current_account
 	
-	current_account = current_account - (productivity_temp1 + productivity_temp2) * service_cost * 0.1
+	current_account = current_account - gdp * service_cost 
 
 # GDP adjustment
 
@@ -164,13 +165,14 @@ while (current_account - total_last_resources) > 0.01 or current_account > minim
 	cu = round(current_account, 2)
 	ex = round(gdp * service_cost)
 	cl = round(cost_of_living, 2)
+	gl = round(gdplastround / gdp, 4)
 
 # results for the turn are printed on the screen
 
-	print(turn," : ",p1,p2,b1,b2,m1,m2,de,gd,cu,ex,cl)
+	print(turn," : ",p1,p2,b1,b2,m1,m2,de,gd,cu,ex,cl,gl)
 
 # the delay before next round is set
 
 	time.sleep(sleeptime)	
 
-print("GAME OVER")
+print("GAME OVER", p1_give,"vs.",p2_give)
