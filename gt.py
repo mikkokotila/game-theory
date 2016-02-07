@@ -5,10 +5,10 @@ import random
 # starting turn and per turn cost for players
 
 turn = 0
-tax_rate = 0.2
-cost_of_living = 0.2
+tax_rate = 0.3
+cost_of_living = 0.05
 players = 2
-service_cost = 0.05
+service_cost = 0.02
 minimum = 1
 gdp = 1
 demand = 1
@@ -48,7 +48,7 @@ gdplastround = 1
 
 p1_give = input("What ratio will player 1 give back at : ")
 p2_give = input("What ratio will player 2 give back at : ")
-sleeptime = input("Delay in seconds between rounds (0 for empty) : ")
+sleeptime = input("Delay in seconds between rounds : ")
 
 while (current_account - total_last_resources) > 0.01 or current_account > minimum:
 	turn = turn + 1
@@ -67,14 +67,14 @@ while (current_account - total_last_resources) > 0.01 or current_account > minim
 	
 	if p1_bank >= cost_of_living * p1_random:
 		p1_bank = p1_bank - cost_of_living * p1_random
-	else:
+	elif p1_bank < cost_of_living * p1_random:
 		current_account = current_account - cost_of_living * p1_random
 
 # player 2 cost of living reduction 
 
 	if p2_bank >= cost_of_living * p2_random:
 		p2_bank = p2_bank - cost_of_living * p2_random
-	else:
+	elif p2_bank < cost_of_living * p2_random:
 		current_account = current_account - cost_of_living * p2_random
 
 # player 1 production and earnings turn
@@ -125,7 +125,7 @@ while (current_account - total_last_resources) > 0.01 or current_account > minim
 
 # admin fee is deducted from the current_account
 	
-	current_account = current_account - (current_account * service_cost)
+	current_account = current_account - (productivity_temp1 + productivity_temp2) * service_cost
 
 # GDP adjustment
 
@@ -163,10 +163,11 @@ while (current_account - total_last_resources) > 0.01 or current_account > minim
 	gd = round(gdp, 2)
 	cu = round(current_account, 2)
 	ex = round(gdp * service_cost)
+	cl = round(cost_of_living, 2)
 
 # results for the turn are printed on the screen
 
-	print(turn," : ",p1,p2,b1,b2,m1,m2,de,gd,cu,ex)
+	print(turn," : ",p1,p2,b1,b2,m1,m2,de,gd,cu,ex,cl)
 
 # the delay before next round is set
 
