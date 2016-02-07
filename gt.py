@@ -25,14 +25,12 @@ motivation_adjustment = 0.01
 p1_productivity = 1
 p1_bank = 0
 p1_motivation = 1
-# p1_give = 0.4
 
 # player two starting settings
 
 p2_productivity = 1
 p2_bank = 0
 p2_motivation = 1
-# p2_give = 0.3
 
 # extra configuration values initialised
 
