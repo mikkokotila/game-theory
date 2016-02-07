@@ -61,21 +61,21 @@ while (current_account - total_last_resources) > 0.01 or current_account > minim
 
 # adjusting the cost of living for the round 
 
-	cost_of_living = cost_of_living * (gdp / gdplastround / 10)
+	cost_of_living = cost_of_living * (gdp / gdplastround)
 
 # player 1 cost of living reduction 
 	
 	if p1_bank >= cost_of_living * p1_random:
 		p1_bank = p1_bank - cost_of_living * p1_random
 	elif p1_bank < cost_of_living * p1_random:
-		current_account = current_account - cost_of_living * p1_random
+		current_account = current_account - cost_of_living * p1_random / 10
 
 # player 2 cost of living reduction 
 
 	if p2_bank >= cost_of_living * p2_random:
 		p2_bank = p2_bank - cost_of_living * p2_random
 	elif p2_bank < cost_of_living * p2_random:
-		current_account = current_account - cost_of_living * p2_random
+		current_account = current_account - cost_of_living * p2_random / 10
 
 # player 1 production and earnings turn
 	
